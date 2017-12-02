@@ -1,0 +1,13 @@
+"E:\IAR\File\arm\bin\armproc.dll" 
+
+"E:\IAR\File\arm\bin\armjlink.dll" 
+
+"E:\K60singlechip\Code\LPLD_OSKinetis_V3\LPLD_Beacon\Beacon\iar\RAM\Exe\Beacon_K60F12.out" 
+
+--plugin "E:\IAR\File\arm\bin\armbat.dll" 
+
+--device_macro "E:\IAR\File\arm\config\debugger\Freescale\Kxx.dmac" 
+
+
+
+

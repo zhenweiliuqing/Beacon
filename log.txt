@@ -1,3 +1,21 @@
-2017.11.24 start Beacon Repository.
-2017.11.26 debug the eagle_camera.
-2017.11.27 start to convert the camera  example of Vcan to LPLD.
+2017.11.24 	start Beacon Repository.
+2017.11.26 	debug the eagle_camera.
+2017.11.27 	start to convert the camera  example of Vcan to LPLD.
+2017.11.30 	Files which are necessary.
+	   	<1>camera_init();
+	   	  ->ov7725_reg_init();|OV7725_DMA_Init();|OV7725_GPIO_Init();
+	    	  ->SCCB_GPIO_Init();reg_s and other definitions;|disable_irq?|DMA_DIS?;
+	  	<2>NVIC_Init();
+	  	<3>camera_get_image();
+	    	  ->ov7725_flag;IMG_STATUS_e;
+	          ->ov7725_vsync();|ov7725_dma();
+2017.12.1	finish the project.
+2017.12.2	Debug  Code and solve problems.
+	  	wrong places:
+		#define SCL_H()         SCCB_SCL = 1
+		#define SCL_L()         SCCB_SDA = 0 //what's the fuck?!
+		//
+		#define     _PTXn_T(ptxn,type)   (ptxn##_##type) //what's the meaning?
+		#define     PTXn_T(ptxn,type)    _PTXn_T(ptxn,type)
+		Complete successfully!
+		
