@@ -2,4 +2,4 @@
 /MDK-ARM/*
 /.vscode
 !/MDK-ARM/*.s
-.zip
+Beacon.zip
