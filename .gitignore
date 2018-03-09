@@ -3,3 +3,4 @@
 /.vscode
 !/MDK-ARM/*.s
 Beacon.zip
+/oldversion/
