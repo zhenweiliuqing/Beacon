@@ -320,6 +320,8 @@
           <state>$PROJ_DIR$\..\..\Chip\inc\IAR</state>
           <state>$PROJ_DIR$\..\..\Chip\inc\kinetis</state>
           <state>$PROJ_DIR$\..\..\Lib\CMSIS\Inc</state>
+          <state>$PROJ_DIR$\..\..\Mycode</state>
+          <state>$PROJ_DIR$\..\..\Mycode\Inc</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1924,9 +1926,6 @@
   <group>
     <name>App</name>
     <file>
-      <name>$PROJ_DIR$\..\..\App\image_processing.c</name>
-    </file>
-    <file>
       <name>$PROJ_DIR$\..\..\App\main.c</name>
     </file>
     <file>
@@ -1948,6 +1947,9 @@
   <group>
     <name>Board</name>
     <file>
+      <name>$PROJ_DIR$\..\..\Board\Src\VCAN_ASCII.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\..\Board\Src\VCAN_camera.c</name>
     </file>
     <file>
@@ -1955,6 +1957,9 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\Board\Src\VCAN_key.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\Board\Src\VCAN_key_event.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\Board\Src\VCAN_LED.C</name>
@@ -1966,6 +1971,9 @@
       <name>$PROJ_DIR$\..\..\Board\Src\VCAN_NRF24L0.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\..\Board\Src\VCAN_NRF24L0_MSG.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\..\Board\Src\VCAN_OV7725_Eagle.c</name>
     </file>
     <file>
@@ -1973,6 +1981,15 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\Board\Src\VCAN_SCCB.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\Board\Src\Vcan_touch.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\Board\Src\VCAN_TSL1401.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\Board\Src\VCAN_UI_VAR.c</name>
     </file>
   </group>
   <group>
@@ -2043,6 +2060,12 @@
   </group>
   <group>
     <name>Lib</name>
+  </group>
+  <group>
+    <name>Mycode</name>
+    <file>
+      <name>$PROJ_DIR$\..\..\Mycode\image_processing.c</name>
+    </file>
   </group>
 </project>
 

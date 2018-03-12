@@ -1,4 +1,4 @@
-"E:\K60singlechip\Beacon\Beacon\Beacon\App\image_processing.c"
+"E:\K60singlechip\Beacon\Beacon\Beacon\Mycode\image_processing.c"
 -std=c99
 -ferror-limit=100
 -I
@@ -15,6 +15,10 @@ E:\K60singlechip\Beacon\Beacon\Beacon\Prj\IAR\..\..\Chip\inc\IAR
 E:\K60singlechip\Beacon\Beacon\Beacon\Prj\IAR\..\..\Chip\inc\kinetis
 -I
 E:\K60singlechip\Beacon\Beacon\Beacon\Prj\IAR\..\..\Lib\CMSIS\Inc
+-I
+E:\K60singlechip\Beacon\Beacon\Beacon\Prj\IAR\..\..\Mycode
+-I
+E:\K60singlechip\Beacon\Beacon\Beacon\Prj\IAR\..\..\Mycode\Inc
 -I
 E:\IAR\File\arm\inc
 -I
@@ -33,6 +37,10 @@ E:\K60singlechip\Beacon\Beacon\Beacon\Chip\inc\IAR
 E:\K60singlechip\Beacon\Beacon\Beacon\Chip\inc\kinetis
 -I
 E:\K60singlechip\Beacon\Beacon\Beacon\Lib\CMSIS\Inc
+-I
+E:\K60singlechip\Beacon\Beacon\Beacon\Mycode
+-I
+E:\K60singlechip\Beacon\Beacon\Beacon\Mycode\Inc
 -DDEBUG=1
 -DARM_MATH_CM4=1
 -DMK60F15=1
