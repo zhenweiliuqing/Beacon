@@ -4,6 +4,6 @@
 !/MDK-ARM/*.s
 Beacon.zip
 /oldversion/
-/Beacon/Prj/IAR/Debug/
+/Beacon/Prj
 /Beacon/Chip
 /Beacon/Lib

@@ -5,16 +5,19 @@
 #include "common.h"
 #define ROWS OV7725_EAGLE_H
 #define COLS OV7725_EAGLE_W
+
 #define RunsNumbers 10
 #define EqualNumbers 5
 #define TreeNumbers 5
 #define FruitNumbers 10
 #define LabelsNumbers 5
 #define TARGET 1
+#define BLACK 0
+#define WHITE 1
 
 typedef struct
 {
-    char *imagedata;
+    uint8 *imagedata;
     int imagerows;
     int imagecols;
 } ImageContent;

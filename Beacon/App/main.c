@@ -51,7 +51,7 @@ void  main(void)
     {
         //获取图像
         camera_get_img();                                   //摄像头获取图像
-        //image_processing(imgbuff);                         //把imagebuff进行处理找中心位置坐标
+        image_processing(imgbuff);                         //把imagebuff进行处理找中心位置坐标
         /***********  提供两种方式可供用户自行选择【二值化模式】、【灰度模式】  ************/
         /***  强调一点：所谓的灰度模式，实际上只有2个像素值，即已经二值化好的灰度模式。  ***/
 

@@ -9,6 +9,9 @@
         1, 1, 0, 1, 0,
         0, 1, 0, 1, 0   }; //原始图像
 */
+
+int finalrow,finalrow;
+
 int catchBiggestLabel(Equiva_Pair *pair,RunContent *runs)
 {
     int max = pair->runLabels[0];
@@ -25,9 +28,9 @@ void fillRuns(ImageContent *image, RunContent *runs)
 {
     for (int i = 0; i < image->imagerows; i++)
     {
-        const char *rowdata = &image->imagedata[i * image->imagecols]; //能将它第一行的首地址赋过来吗
+        const uint8 *rowdata = &image->imagedata[i * image->imagecols]; //能将它第一行的首地址赋过来吗
 
-        if (rowdata[0] == 1)
+        if (rowdata[0] == WHITE)//第一个像素是白
         {
             runs->NumberOfRuns++;
             runs->stRun[runs->NumberOfRuns] = 0;
@@ -36,19 +39,19 @@ void fillRuns(ImageContent *image, RunContent *runs)
 
         for (int j = 1; j < image->imagecols; j++)
         {
-            if (rowdata[j - 1] == 0 && rowdata[j] == 1)
+            if (rowdata[j - 1] == BLACK && rowdata[j] == WHITE)//左黑右白
             {
                 runs->NumberOfRuns++;
                 runs->stRun[runs->NumberOfRuns] = j;
                 runs->RowRun[runs->NumberOfRuns] = i;
             }
-            else if (rowdata[j - 1] == 1 && rowdata[j] == 0)
+            else if (rowdata[j - 1] == WHITE && rowdata[j] == BLACK)//左白右黑
             {
                 runs->enRun[runs->NumberOfRuns] = j - 1;
             }
         }
 
-        if (rowdata[image->imagecols - 1])
+        if (rowdata[image->imagecols - 1])//这一行最后一个像素是白
         {
             runs->enRun[runs->NumberOfRuns] = image->imagecols - 1;
         }
@@ -56,13 +59,13 @@ void fillRuns(ImageContent *image, RunContent *runs)
     //printf("%d\n", runs->NumberOfRuns+1);
 }
 
-void firstPass(RunContent *runs, Equiva_Pair *pair)
-{
+void firstPass(RunContent *runs, Equiva_Pair *pair)//执行完后会把上下两行邻近的团标记成一个标号 同时将等效的团标记进入等价对
+{       
     int i, j;
 
     for (i = 0; i <= runs->NumberOfRuns; i++)//<=
     {
-        pair->runLabels[i] = 0;
+        pair->runLabels[i] = 0;//将所有团的标号都标为0
     }
 
     int idxLabel = 1;
@@ -105,7 +108,7 @@ void firstPass(RunContent *runs, Equiva_Pair *pair)
     }
     //printf("%d\t", pair->NumberOfEquals);
 }
-void replaceSameLabel(Equiva_Pair *pair,TreeList *tree,RunContent *runs)
+void replaceSameLabel(Equiva_Pair *pair,TreeList *tree,RunContent *runs)//替换掉相同的等价对 把等价的团标记成同一个标号
 {
     int i, j;
     int k = 0;
@@ -170,7 +173,7 @@ void replaceSameLabel(Equiva_Pair *pair,TreeList *tree,RunContent *runs)
         pair->runLabels[i] = labelFlag[pair->runLabels[i] - 1];
     }
 }
-void replaceArray(ImageContent *image, RunContent *runs,Equiva_Pair *pair)
+void replaceArray(ImageContent *image, RunContent *runs,Equiva_Pair *pair)//这是把imagedata中的数据标记成团的标号
 {
     int i, j;
     int rowNum = 0;
@@ -189,7 +192,7 @@ void replaceArray(ImageContent *image, RunContent *runs,Equiva_Pair *pair)
     }
 }
 
-void extractCenter(ImageContent *image,Location *center)
+void extractCenter(ImageContent *image,Location *center)//
 {
     int i, j;
     int sumrow[3] = {0}, sumcol[3] = {0};
@@ -235,6 +238,15 @@ void extractCenter(ImageContent *image,Location *center)
     center->col = (int)(sumcol[j] / max);
 }
 
+void labelCross(uint8 *image,int row,int col)
+{
+    image[COLS * (row - 1) + col] = WHITE;
+    image[COLS * (row - 1) + col + 1] = BLACK;
+    image[COLS * (row - 1) + col - 1] = BLACK;
+    image[COLS * (row - 2) + col] = BLACK;
+    image[COLS * row + col] = BLACK;
+}
+
 void image_processing(uint8 *imagepre_array)
 {
     int i, j, k;
@@ -278,7 +290,11 @@ void image_processing(uint8 *imagepre_array)
     replaceSameLabel(&equival_test, &tree_test, &run_test);//上述代码全部测试成功！！2018.3.3  19:45
     replaceArray(&image_test, &run_test, &equival_test);//可以成功输出连通的图象！！ 20:25!
     extractCenter(&image_test, &center_test);
-    for (i = 0; i < 5;i++)
+    labelCross(imagepre_array,center_test.row,center_test.col);
+    finalrow = center_test.row;
+    finalcol = center_test.col;
+    
+    /*for (i = 0; i < 5;i++)
     {
         for (j = 0; j < 5;j++)
         {
@@ -287,5 +303,5 @@ void image_processing(uint8 *imagepre_array)
         printf("\n");
     }
     printf("%d\t%d\t", center_test.row, center_test.col);
-
+    */
 }
