@@ -3,17 +3,25 @@
 
 #include "VCAN_OV7725_Eagle.h"
 #include "common.h"
-#define ROWS OV7725_EAGLE_H
-#define COLS OV7725_EAGLE_W
 
-#define RunsNumbers 10
-#define EqualNumbers 5
-#define TreeNumbers 5
-#define FruitNumbers 10
-#define LabelsNumbers 5
+#define camera_h 60
+#define camera_w 80
+#define camera_size camera_h * camera_w
+#define half_camera_h camera_h/2
+#define half_camera_w camera_w/2
+
+#define ROWS camera_h
+#define COLS camera_w
+
+#define RunsNumbers 200
+#define EqualNumbers 50
+#define TreeNumbers 50
+#define FruitNumbers 50
+#define LabelsNumbers 50
 #define TARGET 1
+
 #define BLACK 0
-#define WHITE 1
+#define WHITE 255
 
 typedef struct
 {

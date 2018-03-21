@@ -2,8 +2,7 @@
 /MDK-ARM/*
 /.vscode
 !/MDK-ARM/*.s
-Beacon.zip
-/oldversion/
+/Beacon/settings
 /Beacon/Prj
 /Beacon/Chip
 /Beacon/Lib

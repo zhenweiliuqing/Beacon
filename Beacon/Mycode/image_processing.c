@@ -1,16 +1,8 @@
 #include "image_processing.h"
 #include "common.h"
 
-/*char imagepre_array[25] =
-    {
-        0, 0, 1, 0, 0,
-        0, 0, 1, 1, 1,
-        0, 1, 0, 0, 1,
-        1, 1, 0, 1, 0,
-        0, 1, 0, 1, 0   }; //原始图像
-*/
 
-int finalrow,finalrow;
+int finalrow,finalcol;
 
 int catchBiggestLabel(Equiva_Pair *pair,RunContent *runs)
 {
@@ -55,6 +47,10 @@ void fillRuns(ImageContent *image, RunContent *runs)
         {
             runs->enRun[runs->NumberOfRuns] = image->imagecols - 1;
         }
+        
+       // if(runs->NumberOfRuns == RunsNumbers)
+         //   break;
+        
     }
     //printf("%d\n", runs->NumberOfRuns+1);
 }
@@ -105,7 +101,11 @@ void firstPass(RunContent *runs, Equiva_Pair *pair)//执行完后会把上下两
         {
             pair->runLabels[i] = idxLabel++;
         }
+        
+        ///if(pair->NumberOfEquals == EqualNumbers)
+          //break;
     }
+    
     //printf("%d\t", pair->NumberOfEquals);
 }
 void replaceSameLabel(Equiva_Pair *pair,TreeList *tree,RunContent *runs)//替换掉相同的等价对 把等价的团标记成同一个标号
@@ -167,6 +167,8 @@ void replaceSameLabel(Equiva_Pair *pair,TreeList *tree,RunContent *runs)//替换
         }
         
         tree->treesize++;//树又多了一棵！
+        //if(tree->treesize == TreeNumbers)
+          //break;
     }
     for (i = 0; i < runs->NumberOfRuns;i++)
     {
@@ -208,6 +210,7 @@ void extractCenter(ImageContent *image,Location *center)//
                 sumrow[0] += i;
                 sumcol[0] += j;
                 num[0]++;
+                image->imagedata[i * image->imagecols + j] = WHITE;
             }
             if (image->imagedata[i * image->imagecols + j] == 2)//关键是怎么找到这个2并排除其他干扰
             {
@@ -264,8 +267,8 @@ void image_processing(uint8 *imagepre_array)
     tree_test.treesize = 0;
     center_test.col = 0;
     center_test.row = 0;
-
-    for (i = 0; i < 10;i++)
+    
+    for (i = 0; i < RunsNumbers; i++)
     {
         run_test.stRun[i] = -1;
         run_test.enRun[i] = -1;
@@ -273,15 +276,19 @@ void image_processing(uint8 *imagepre_array)
         equival_test.runLabels[i] = -1;
     }
 
-    for (j = 0; j < 5;j++)
+    for (j = 0; j < TreeNumbers; j++)
     {
-        equival_test.equal[j].equ_first = -1;
-        equival_test.equal[j].equ_second = -1;
         tree_test.treeList[j].fruitsize = 0;
-        for (k = 0; k < 10; k++)
+        for (k = 0; k < FruitNumbers; k++)
         {
             tree_test.treeList[j].fruitList[k] = -1;
         }
+    }
+
+    for (j = 0; j < EqualNumbers;j++)
+    {
+        equival_test.equal[j].equ_first = -1;
+        equival_test.equal[j].equ_second = -1;
     }
 
     fillRuns(&image_test, &run_test);
