@@ -1,2 +1,2 @@
 # Beacon
-2018 the grope of Beacon
+Beacon Group in 2018
