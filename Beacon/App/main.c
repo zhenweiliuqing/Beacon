@@ -17,13 +17,11 @@
 #include "common.h"
 #include "include.h"
 #include "math.h"
-#include "image_processing.h"
 
 uint8 imgbuff[CAMERA_SIZE];           //定义存储接收图像的数组
 uint8 img[CAMERA_W*CAMERA_H];         //由于鹰眼摄像头是一字节8个像素，因而需要解压为 1字节1个像素，方便处理
                                       //假如需要二维数组，只需要改成 uint8 img[CAMERA_H][CAMERA_W];
                                       //imgbuff是采集的缓冲区，img是解压后的缓冲区。imgbuff用于采集图像，img用于图像处理.
-uint8 imgtest[CAMERA_SIZE] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
 
 //函数声明
 void PORTA_IRQHandler();
@@ -42,23 +40,8 @@ void DMA0_IRQHandler();
 void  main(void)
 {
     //初始化摄像头
-    int i,j;
-    uint8 imgtestgrey[camera_size];
     camera_init(imgbuff);                                  //这里设定  imgbuff 为采集缓冲区！！！！！！
-    /*for (i = 0; i < camera_h; i++)
-    {
-        for (j = 0; j < camera_w; j++)
-        {
-            if (i > half_camera_h - 20 && i < half_camera_h+ 20 && j > half_camera_w - 20 && j < half_camera_h + 20)
-            {
-                imgtestgrey[i * camera_w + j] = WHITE;
-            }
-            else
-            {
-                imgtestgrey[i * camera_w + j] = BLACK;
-            }
-        }
-    }*/
+
     //配置中断服务函数
     set_vector_handler(PORTA_VECTORn ,PORTA_IRQHandler);    //设置PORTA的中断服务函数为 PORTA_IRQHandler
     set_vector_handler(DMA0_VECTORn ,DMA0_IRQHandler);      //设置DMA0的中断服务函数为 DMA0_IRQHandler
@@ -72,19 +55,16 @@ void  main(void)
         /***********  提供两种方式可供用户自行选择【二值化模式】、【灰度模式】  ************/
         /***  强调一点：所谓的灰度模式，实际上只有2个像素值，即已经二值化好的灰度模式。  ***/
 
-#if 1       //不解压，直接发送二值化图像到上位机。上位机选择【二值化模式】
+#if 0       //不解压，直接发送二值化图像到上位机。上位机选择【二值化模式】
 
         //发送图像到上位机
         vcan_sendimg(imgbuff, CAMERA_SIZE);                  //发送到上位机
-        //vcan_sendimg(imgtest, CAMERA_SIZE);                  //发送到上位机
 
 #else     //解压，生成只有2个像素值的灰度图像到上位机。上位机选择【灰度模式】
 
-        //img_extract(img, imgbuff,CAMERA_SIZE);                  //解压图像
-        image_processing(imgtestgrey);
-        //image_processing(img);
-        //vcan_sendimg(img, camera_h * camera_w);                  //发送到上位机
-        vcan_sendimg(imgtestgrey, camera_h * camera_w);                  //发送到上位机
+        img_extract(img, imgbuff,CAMERA_SIZE);                  //解压图像
+        Image_Processing(img,60,80);
+        vcan_sendimg(img, CAMERA_H * CAMERA_W);                  //发送到上位机
 #endif
     }
 }

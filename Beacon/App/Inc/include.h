@@ -6,6 +6,7 @@
 /*
  * Include 用户自定义的头文件
  */
+#include "Image_processing.h"
 
 #include  "MK60_wdog.h"
 #include  "MK60_gpio.h"     //IO口操作
