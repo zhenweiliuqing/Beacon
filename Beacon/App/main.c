@@ -64,7 +64,7 @@ void  main(void)
 
         img_extract(img, imgbuff,CAMERA_SIZE);                  //解压图像
         Image_Processing(img,60,80);
-        vcan_sendimg(img, CAMERA_H * CAMERA_W);                  //发送到上位机
+        //vcan_sendimg(img, CAMERA_H * CAMERA_W);                  //发送到上位机
 #endif
     }
 }
