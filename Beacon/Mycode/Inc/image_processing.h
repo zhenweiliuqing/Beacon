@@ -1,8 +1,6 @@
 #ifndef _IMAGE_PROCESSING_H_
 #define _IMAGE_PROCESSING_H_
 
-#define WHITE 255
-#define BLACK 0
 #define CON_NUM 5
 
 typedef struct

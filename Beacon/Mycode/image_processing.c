@@ -1,6 +1,10 @@
 #include "common.h"
 #include "Image_processing.h"
 
+#define WHITE 255
+#define BLACK 0
+
+
 void Image_Processing(uint8 *img ,int row ,int col)
 {
     int i,j;
@@ -48,10 +52,10 @@ void Image_Processing(uint8 *img ,int row ,int col)
     char FLAG_CONNECT_START = 0;
     char FLAG_CONNECT_END = 0;
     int connect_num = 0;
-    int midx[60] = {0};//ÿһ���а�ɫ�ŵ���ֵ ������һ���а�ɫ���� ���¼��������һ�� ����Ϊ0 
-    int midy[60] = {0};//ÿһ�а�ɫ�ŵ�����ֵ ����ɫ���ص���λy���� ���ȫ����Ϊ0
+    int midx[60] = {0};//每一锟斤拷锟叫帮拷色锟脚碉拷锟斤拷值 锟斤拷锟斤拷锟斤拷一锟斤拷锟叫帮拷色锟斤拷锟斤拷 锟斤拷锟铰硷拷锟斤拷锟斤拷锟斤拷锟揭伙拷锟� 锟斤拷锟斤拷为0 
+    int midy[60] = {0};//每一锟叫帮拷色锟脚碉拷锟斤拷锟斤拷值 锟斤拷锟斤拷色锟斤拷锟截碉拷锟斤拷位y锟斤拷锟斤拷 锟斤拷锟饺拷锟斤拷锟轿�0
     
-    for (i = 1;i < row;i++)//�ٴα���ͼ�� �õ�������������
+    for (i = 1;i < row;i++)//锟劫次憋拷锟斤拷图锟斤拷 锟矫碉拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
     {
         if (loc.row_mid[i - 1] != 0 && loc.row_mid[i] != 0 && connect_num <= CON_NUM)
         {
@@ -118,10 +122,10 @@ void Image_Processing(uint8 *img ,int row ,int col)
     
     for (i = 0; i < row; i++)
     {
-        printf("%d\t%d\t%d\t%d\n",i,midy[i],loc.row_st[i],loc.row_end[i]);
+        //printf("%d\t%d\t%d\t%d\n",i,midy[i],loc.row_st[i],loc.row_end[i]);
     }
     
-    printf("%d\t%d\n\n\n", x, y);
+    //printf("%d\t%d\n\n\n", x, y);
 
     img[col * x + y] = BLACK;
     
