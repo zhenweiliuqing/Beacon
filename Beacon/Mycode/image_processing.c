@@ -5,7 +5,7 @@
 #define BLACK 0
 
 
-void Image_Processing(uint8 *img ,int row ,int col)
+int Image_Processing(uint8 *img ,int row ,int col,Light *light)
 {
     int i,j;
     Record loc;
@@ -128,5 +128,8 @@ void Image_Processing(uint8 *img ,int row ,int col)
     //printf("%d\t%d\n\n\n", x, y);
 
     img[col * x + y] = BLACK;
+    
+    return y;
+    //printf("%d",light->x);
     
 }

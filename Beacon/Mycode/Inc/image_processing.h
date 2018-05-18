@@ -18,8 +18,12 @@ typedef struct
     Nect nnect[CON_NUM];
 } Record;
 
+typedef struct 
+{
+   int x;
+   int y;
+} Light;
 
-
-void Image_Processing(uint8 *img ,int row ,int col);
+int Image_Processing(uint8 *img ,int row ,int col,Light *light);
 
 #endif

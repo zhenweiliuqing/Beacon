@@ -2,7 +2,24 @@
 #include "common.h"
 #include "include.h"
 
+uint8 Flag_20ms = 0;
+extern int lox;
+
 void PIT1_IRQHandler(void)
+{
+    Flag_20ms++;
+    if (Flag_20ms == 20)
+    {
+        Flag_20ms = 0;
+        PD_calculation((uint8)lox);
+        //printf("%d\n",100);
+    }
+    
+    PIT_Flag_Clear(PIT1); 
+}
+
+
+/*void PIT1_IRQHandler(void)
 {
     Flag_5ms++;
     Flag_10ms++;
@@ -76,7 +93,7 @@ void PIT1_IRQHandler(void)
     if (Flag_200ms == 200)
         Flag_200ms = 0;
     PIT_Flag_Clear(PIT1); //���жϱ�־λ
-}
+}*/
 
 /*!
  *  @brief      PORTA中断服务函数

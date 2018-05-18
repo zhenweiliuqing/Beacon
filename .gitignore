@@ -1,7 +1,9 @@
 /Drivers/
 /MDK-ARM/*
-/.vscode
+/Beacon/.vscode
 !/MDK-ARM/*.s
+/Beacon/App
+/Beacon/Board
 /Beacon/settings
 /Beacon/Prj
 /Beacon/Chip
