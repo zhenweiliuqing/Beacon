@@ -2,7 +2,7 @@
 #define _STEERING_H_
 #define S3010_FTM   FTM0
 #define S3010_CH    FTM_CH1//C2
-#define S3010_HZ    100
+#define S3010_HZ    (100)
 
 #define DUTY_MAX  2340
 #define DUTY_MIN  1940      
@@ -21,16 +21,16 @@ typedef struct PD {
      
      int16      error;         //偏差
      int16 last_error;        //上一次偏差
-     
-     uint16 duty;             //占空比的值
+     int Gyro_error;
+     int duty;             //占空比的值
 }PD;
 
 void Steering_init();
 void Steering_test();
 
 //初始化PD参数
-void PD_init();
+void PD_init(PD *pdvar);
 //PD的计算
-void PD_calculation(const uint8 Mid);
+void PD_calculation(PD *pdvar,int8 Mid);
 
 #endif

@@ -8,7 +8,7 @@
 int Image_Processing(uint8 *img ,int row ,int col,Light *light)
 {
     int i,j;
-    Record loc;//è®°å½•æ¯ä¸€è¡Œç™½å—å¼€å¤´ ç»“å°¾çš„ä½ç½®
+    Record loc;//¼ÇÂ¼Ã¿Ò»ĞĞ°×¿é¿ªÍ· ½áÎ²µÄÎ»ÖÃ
     i = j = 0;
     
     for (i = 0;i < row;i++)
@@ -36,16 +36,16 @@ int Image_Processing(uint8 *img ,int row ,int col,Light *light)
 
         for (j = 1;j < col; j++)
         {
-            if (rowdata[j - 1] == BLACK && rowdata[j] == WHITE)//å·¦é»‘å³ç™½ ç™½å—å¼€å§‹
+            if (rowdata[j - 1] == BLACK && rowdata[j] == WHITE)//×óºÚÓÒ°× °×¿é¿ªÊ¼
             {
                 loc.row_st[i] = j;
             }
-            else if (rowdata[j - 1] == WHITE && rowdata[j] == BLACK)//å·¦ç™½å³é»‘  ç™½å—ç»“æŸ
+            else if (rowdata[j - 1] == WHITE && rowdata[j] == BLACK)//×ó°×ÓÒºÚ  °×¿é½áÊø
             {
                 loc.row_end[i] = j;
             }
         }
-        loc.row_mid[i] = (loc.row_st[i] + loc.row_end[i])/2;//è¿™ä¸€è¡Œç™½å—çš„ä¸­å€¼
+        loc.row_mid[i] = (loc.row_st[i] + loc.row_end[i])/2;//ÕâÒ»ĞĞ°×¿éµÄÖĞÖµ
     }//get all 
 
     int count = 0;
@@ -57,24 +57,24 @@ int Image_Processing(uint8 *img ,int row ,int col,Light *light)
     
     for (i = 1;i < row;i++)//
     {
-        if (loc.row_mid[i - 1] != 0 && loc.row_mid[i] != 0 && connect_num <= CON_NUM)//ä¸¤è¡Œç™½å—ç›¸è¿ ä¸” è¿é€šåŸŸçš„æ•°é‡å°äºè®¾å®šå€¼(ä¸»è¦æ˜¯ä¸ºäº†é˜²æ­¢å‡ºç°å¹²æ‰°) ä¿è¯å–æœ€å¤§çš„ç™½è‰²çš„è¿é€šåŸŸ
+        if (loc.row_mid[i - 1] != 0 && loc.row_mid[i] != 0 && connect_num <= CON_NUM)//Á½ĞĞ°×¿éÏàÁ¬ ÇÒ Á¬Í¨ÓòµÄÊıÁ¿Ğ¡ÓÚÉè¶¨Öµ(Ö÷ÒªÊÇÎªÁË·ÀÖ¹³öÏÖ¸ÉÈÅ) ±£Ö¤È¡×î´óµÄ°×É«µÄÁ¬Í¨Óò
         {
             FLAG_CONNECT_START = 1;
-            count++;//è®°å½•è¿™ä¸ªç™½è‰²è¿é€šåŸŸçš„è¡Œæ•°
+            count++;//¼ÇÂ¼Õâ¸ö°×É«Á¬Í¨ÓòµÄĞĞÊı
             midx[i - 1] = i - 1;
             midy[i - 1] = loc.row_mid[i - 1];
         }
-        else if (FLAG_CONNECT_START == 1)//ç™½å—å·²ç»ä¸ç›¸è¿äº†
+        else if (FLAG_CONNECT_START == 1)//°×¿éÒÑ¾­²»ÏàÁ¬ÁË
         {
-            FLAG_CONNECT_END = 1;//ç»“æŸæ ‡å¿—
+            FLAG_CONNECT_END = 1;//½áÊø±êÖ¾
             loc.nnect[connect_num].num = count;
             loc.nnect[connect_num].start = i - count;
             loc.nnect[connect_num].end = i;
         }
         
-        if (FLAG_CONNECT_START == 1 && FLAG_CONNECT_END == 1)//ä¸€ä¸ªç™½è‰²è¿é€šåŸŸç»“æŸ 
+        if (FLAG_CONNECT_START == 1 && FLAG_CONNECT_END == 1)//Ò»¸ö°×É«Á¬Í¨Óò½áÊø 
         {
-            connect_num++;//è®°å½•æ•°é‡
+            connect_num++;//¼ÇÂ¼ÊıÁ¿
             count = 0;
             FLAG_CONNECT_START = FLAG_CONNECT_END = 0;
         }
@@ -92,11 +92,11 @@ int Image_Processing(uint8 *img ,int row ,int col,Light *light)
     
     for (i = 0; i < CON_NUM; i++)
     {
-         if (loc.nnect[i].num > max_count)//é€‰æ‹©è¡Œæ•°æœ€å¤šçš„ç™½è‰²è¿é€šåŸŸ
+         if (loc.nnect[i].num > max_count)//Ñ¡ÔñĞĞÊı×î¶àµÄ°×É«Á¬Í¨Óò
          {
              max_count = loc.nnect[i].num;
-             min_x = loc.nnect[i].start;//ç™½å—å¼€å§‹è¡Œ
-             max_x = loc.nnect[i].end;//ç™½å—ç»“æŸè¡Œ
+             min_x = loc.nnect[i].start;//°×¿é¿ªÊ¼ĞĞ
+             max_x = loc.nnect[i].end;//°×¿é½áÊøĞĞ
          }
     }
     
@@ -113,12 +113,12 @@ int Image_Processing(uint8 *img ,int row ,int col,Light *light)
         
         if (max_y < midy[i])
         {
-            max_y = midy[i];//æ±‚å¾—æ‰€æœ‰ç™½å—ä¸­å€¼çš„æœ€å¤§å€¼ 
+            max_y = midy[i];//ÇóµÃËùÓĞ°×¿éÖĞÖµµÄ×î´óÖµ 
         }
     }
     
-    x = (int)(min_x + max_x) / 2;//æ±‚è¡Œçš„ä¸­é—´å€¼
-    y = max_y;//åˆ—çš„ä¸­é—´å€¼
+    x = (int)(min_x + max_x) / 2;//ÇóĞĞµÄÖĞ¼äÖµ
+    y = max_y;//ÁĞµÄÖĞ¼äÖµ
     
     for (i = 0; i < row; i++)
     {
