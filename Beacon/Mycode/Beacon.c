@@ -1,6 +1,5 @@
 //Time:2018-5-12
 //Function:a new mode
-//
 
 #include "include.h"
 
@@ -9,6 +8,7 @@ void  delay1us();
 void  delay10us();
 void  delay100us();
 void delay10ms();
+
 typedef enum
 {
   Mode1 = 1,
@@ -62,8 +62,20 @@ void main()
     Beacon_Init();
     EnableInterrupts;
     //uint16 duty = 1800;
+    //led(LED0,LED_ON);
     while (1)
-    {
+    { 
+        /*DELAY_MS(50);
+        if (gpio_get(PTD5) == 0)//按键按下为低电平 若检测到低电平
+        {
+            led(LED3,LED_OFF);
+            
+        }
+        else if (gpio_get(PTD5) == 1)
+        {
+            led(LED3, LED_ON);
+        }*/
+
         /*
         ftm_pwm_init(FTM0, FTM_CH1, 100, duty);
         delay10ms();
@@ -71,7 +83,8 @@ void main()
         duty += 10;
         if (duty == 2340)
             duty = 1800;
-        printf("%d\n",duty);*/
+        printf("%d\n",duty);
+        //timestart();
         camera_get_img(); //摄像头获取图像
         //vcan_sendimg(imgbuff, CAMERA_SIZE); //发送到上位机
 
@@ -80,9 +93,10 @@ void main()
         lox = correct_x(lox);
         //printf("%d\t",lox);
         vcan_sendimg(img, CAMERA_W * CAMERA_H); //发送到上位机
+        timeend();
         //PD_calculation((uint8)lox);
 
-        /*
+        
         if (lox <= 30)
         {
                ftm_pwm_init(FTM0, FTM_CH1, 100, 2000);
@@ -97,12 +111,9 @@ void main()
         }
          */
         //LCD_Display();
-        //send_img(Mode2);
+        //send_img(Mode2);*/
     }
 }
-
-
-
 
 void send_img(int mode)
 {
